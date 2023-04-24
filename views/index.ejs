@@ -1,0 +1,93 @@
+<%- include('partes/header.ejs')%> <%- include('partes/nav.ejs')%>
+<div class="som-img">
+  <div class="container">
+    <div class="row">
+      <br>
+      <div class="col-md-7 mx-auto " style="margin: 20px;">
+        <form action="/" method="get" style="display:flex;">
+          <select
+            name="category"
+            class="form-control  d-inline"
+          >
+            <option value="all" selected>All</option>
+            <option value="phones">Phone</option>
+            <option value="clothes">clothes</option>
+            <option value="laptop">Laptop</option>
+            
+          </select>
+         
+          <input type="submit" class="btn btn-primary" value="filter" />
+        </form>
+      </div>
+      <br>
+      <% if (error.length > 0) { %>
+      <div class="alert alert-danger col col-mb-3 col-xl-7 mx-auto">
+        <%= error %>
+      </div>
+      <% } %>
+      <% if (errororder.length > 0) { %>
+        <div class="alert alert-danger col col-mb-3 col-xl-7 mx-auto">
+          <%= errororder %>
+        </div>
+        <% } %>
+  
+      <% if( success.length > 0 ) { %>
+        <p class="alert alert-success col col-mb-3 col-xl-7 mx-auto"><%= success[0] %></p>
+        <% } %>
+  
+        <% if( errorPrduct.length > 0 ) { %>
+          <p class="alert alert-danger col col-mb-3 col-xl-7 mx-auto"><%= errorPrduct[0] %></p>
+          <% } %>
+    </div>
+  
+    <% if(Product.length === 0 ){ %>
+    <div class="row">
+      <h1 class="alert alert-danger">Not found product</h1>
+    </div>
+  
+    <% } else {%>
+    <div class="row">
+      <% for(let prodecth of Product){ %>
+  
+      <div class="col-md-4 col-s-1 Compoun">
+        <div class="card" style="width: 18rem">
+          <div class="img-5">
+            <img src="<%= prodecth.image%>" class="card-img-top" alt="..." />
+          </div>
+          
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="/product/<%= prodecth._id%>"><%= prodecth.name%></a>
+              <p>Price: <%= prodecth.price%> $</p>
+            </h5>
+            <form action="/cart" method="post">
+              <input type="hidden" name="amount" class="form-control" value="1" />
+              <input type="hidden" name="name" value="<%= prodecth.name%>" />
+              <input type="hidden" name="price" value="<%= prodecth.price%>" />
+              <input type="hidden" name="productId" value="<%= prodecth._id%>" />
+              <input type="hidden" name="redirectTo" value="/" />
+              <input type="submit" value="Add to cart" class="btn btn-primary" />
+            </form>
+            <br />
+            <% if(isAdmin) { %>
+            <a
+              href="/manageprodect/update/<%= prodecth._id%>"
+              class="btn btn-success d-inline"
+              >Update</a
+            >
+            <form action="/manageprodect/delete" method="post" class="d-inline">
+              <input type="hidden" value="<%= prodecth._id%>" name="id" />
+              <input type="submit" class="btn btn-danger" value="Delete" />
+            </form>
+  
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+    <%}%>
+  </div>
+</div>
+
+<%- include('partes//footer.ejs')%>

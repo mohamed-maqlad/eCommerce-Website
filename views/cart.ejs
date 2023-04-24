@@ -1,0 +1,94 @@
+<%- include('partes/header.ejs')%> <%- include('partes/nav.ejs')%>
+
+<br />
+<% if( error.length > 0 ) { %>
+<p class="alert alert-danger"><%= error[0] %></p>
+<% } %> <% if( success.length > 0 ) { %>
+<p class="alert alert-success"><%= success[0] %></p>
+<% } %> <% if (item.length === 0) { %>
+<div class="alert alert-danger col col-mb-3 col-xl-5 mx-auto">
+  <p>There is no item for cart</p>
+</div>
+<% } else { %>
+<br />
+<div class="container">
+  <div class="row">
+    <table class="table table-hover table-bordered mt-10">
+      <thead class="table-dark">
+        <tr class="table table-dark">
+          <th scope="col">no</th>
+          <th scope="col">Product name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Amount</th>
+          <th scope="col">save amount and delete product</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let i = 0 ; i < item.length ; i++) { %>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%= item[i].name %></td>
+          <td><%= item[i].price *item[i].amount %></td>
+          <form method="post">
+            <td class="text-center">
+              <input type="text" name="amount" value="<%= item[i].amount %>" class="mx-auto" />
+            </td>
+            
+            <td>
+              <input type="hidden" name="cartId" value="<%= item[i]._id %>" />
+              <input
+                type="submit"
+                value="update amount"
+                class="btn btn-success"
+                formaction="/cart/save"
+              />
+              <input
+                type="submit"
+                value="delete"
+                class="btn btn-danger"
+                formaction="/cart/delete"
+              />
+            </td>
+          </form>
+        </tr>
+      </tbody>
+
+      <% } %>
+    </table>
+
+    <ul>
+      <% let totalPrice = 0; %>
+      <% let totalAmont = 0; %>
+      <% for (let i = 0; i < item.length; i++) { %>
+        <% const itemd = item[i]; %>
+        
+        <% totalPrice += itemd.price * itemd.amount; %>
+        <% totalAmont +=  itemd.amount; %>
+      <% } %>
+    </ul>
+    
+    <p class="alert alert-secondary col-3">Total price: <%= totalPrice %></p>
+    <p class="alert alert-secondary col-3">Total amount: <%= totalAmont %></p>
+
+    <form method="post">
+      <input
+        type="submit"
+        value="delete all cart"
+        class="btn btn-danger"
+        formaction="/cart/deletall"
+      />
+      <input type="hidden" name="cost" value="<%= totalPrice %>">
+      <input type="hidden" name="amount" value="<%= totalAmont %>">
+      <input
+      type="submit"
+      value="save to oreder"
+      class="btn btn-success"
+      formaction="/cart/saveorder"
+    />
+    </form>
+   
+
+    
+  </div>
+</div>
+<% } %> <%- include('partes//footer.ejs')%>

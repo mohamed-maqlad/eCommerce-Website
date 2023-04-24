@@ -1,0 +1,53 @@
+<%- include('partes/header.ejs')%> <%- include('partes/nav.ejs')%>
+<!-- <% if(isAdmin) { %>
+    <h1>Admin page</h1>
+    <% } %> -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xl-7 m-auto">
+      <h1 class="text-center">Add Product</h1>
+      <form action="/manageprodect/addproduct" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+          <% if( error.length > 0 ) { %>
+          <p class="alert alert-danger"><%= error[0] %></p>
+          <% } %> <% if( success.length > 0 ) { %>
+          <p class="alert alert-success"><%= success[0] %></p>
+          <% } %>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-control" name="name" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Price</label>
+          <input type="number" class="form-control" name="price" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <input type="text" class="form-control" name="description" />
+        </div>
+        <div class="mb-3">
+          <select
+            name="category"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Category</option>
+            <option value="phones">Phone</option>
+            <option value="clothes">clothes</option>
+            <option value="laptop">Laptop</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label"
+            >choose imge</label
+          >
+          <input type="file" class="form-control" name="image" />
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('partes//footer.ejs')%>

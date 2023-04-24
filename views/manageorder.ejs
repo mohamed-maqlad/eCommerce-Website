@@ -1,0 +1,104 @@
+
+<%- include('partes/header.ejs')%> <%- include('partes/nav.ejs')%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Manage order</h1>
+        <% if( error.length > 0 ) { %>
+            <p class="alert alert-danger"><%= error[0] %></p>
+            <% } %>
+  
+            <% if( success.length > 0 ) { %>
+              <p class="alert alert-success"><%= success[0] %></p>
+              <% } %>
+<br>
+<div  style="display:flex">
+    <form action="/manageorder/find" method="post" style="margin-right: 10px;">
+        <input type="submit" value="pending" name="status" class="btn btn-secondary">
+        <input type="submit" value="sent" name="status" class="btn btn-secondary">
+        <input type="submit" value="complete" name="status" class="btn btn-secondary">
+    </form>
+    <form action="/manageorder" method="get">
+        <input type="submit" value="All order" name="status" class="btn btn-primary">
+    </form>
+</div>
+<br>
+<div  style="display:flex" >
+    <form action="/manageorder/search" method="post" class="col-md-12" >
+        <div style="display:flex" class="col-md-4" >
+          <input
+          style="margin-right: 10px;"
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email"
+            placeholder="E-mail"
+          />
+          <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+        
+        
+        <br />
+      </form>
+</div>
+
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Your email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Total amoun</th>
+            <th scope="col">Total cost</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i = 0 ; i < orders.length ; i++) { %>
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <td><%= orders[i].email %></td>
+            <td><%= orders[i].address %></td>
+            <td><%= orders[i].totalamount %></td>
+            <td><%= orders[i].cost %></td>
+            <td>
+                <form action="/manageorder/update" method="post"  style="display:flex">
+                    <div style="display:flex">
+                        <select
+                          name="status"
+                          class="form-select"
+                          aria-label="Default select example"
+                          style="margin-right: 10px;"
+                        >
+                          <option selected><%= orders[i].status %></option>
+                          <option value="pending">pending</option>
+                          <option value="sent">sent</option>
+                          <option value="complete">complete</option>
+                          
+                          <
+                        </select>
+                        <input type="submit" class="btn btn-success" value="save">
+                        <input type="hidden" name="orderid" value="<%= orders[i]._id %>">
+                      </div>
+                      
+                      
+                </form>
+
+            </td>
+          </tr>
+
+        </tbody>
+        <% } %>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+  
+
+
+
+<%- include('partes//footer.ejs')%>

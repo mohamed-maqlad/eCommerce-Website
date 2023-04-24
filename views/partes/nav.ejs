@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg  main-navbar" style="display: block;"  id="rs-header">
+  <div class="contanier menu-sticky">
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand" href="#">Shopping</a> -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse main-menu" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 pagination main-menu">
+          <li class="nav-item">
+            <a class="nav-link  hvr-shutter-out-horizontal" aria-current="page" href="/">Home</a>
+          </li>
+          <%if(isUser){%>
+          <li class="nav-item page-item">
+            <a class="nav-link hvr-shutter-out-horizontal" href="/cart">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link hvr-shutter-out-horizontal" href="/order">Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link hvr-shutter-out-horizontal" href="/profile">profile</a>
+          </li>
+          <% } else { %> 
+          <li class="nav-item">
+            <a class="nav-link hvr-shutter-out-horizontal" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link hvr-shutter-out-horizontal" href="/signup">signUp</a>
+          </li>
+          <% } %> <% if(isAdmin && isUser) { %>
+          <li class="nav-item">
+            <a class="nav-link hvr-shutter-out-horizontal" href="/manageprodect">Add Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link hvr-shutter-out-horizontal" href="/admin/manageadmin">Manage admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link hvr-shutter-out-horizontal" href="/manageorder">Manage order</a>
+          </li>
+          <% } %>
+        </ul>
+        <%if(isUser || isAdmin ){%>
+        <form action="/logout" method="post" class="text-end">
+          <input type="submit" class="btn btn-danger" value="logout" />
+        </form>
+        <%}%>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+<!-- <nav class="navbar navbar-expand-lg  main-navbar" id="rs-header">
+  <div class="container menu-sticky ">
+    <ul class="main-menu">
+      <li class="hvr-shutter-out-horizontal"><a  href="home.html">Home</a></li>
+      <li  class="hvr-shutter-out-horizontal"><a href="about.html">ABOUT</a></li>
+      <li  class="hvr-shutter-out-horizontal"><a href="services .html">SERVICES</a></li>
+      <li  class="hvr-shutter-out-horizontal"><a href="#">COMPOUNDIN</a></li>
+      <li  class="hvr-shutter-out-horizontal"><a href="#">REFILL&TRANSFER</a>
+      </li>
+      <li  class="hvr-shutter-out-horizontal"><a href="Contact.html">CONTACT</a></li>
+    </ul>
+  </div>
+</nav> -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script> -->

@@ -1,0 +1,39 @@
+<%- include('partes/header.ejs')%> <%- include('partes/nav.ejs')%>
+
+<div class="container">
+  <div class="row">
+    <div class="col col-xl-7 col-md-4 text-center mx-auto">
+      <h1>Manage Admin</h1>
+      <form  method="post">
+        <div class="mb-3">
+          <% if( error.length > 0 ) { %>
+          <p class="alert alert-danger"><%= error[0] %></p>
+          <% } %>
+
+          <% if( success.length > 0 ) { %>
+            <p class="alert alert-success"><%= success[0] %></p>
+            <% } %>
+
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <input type="submit"  value="Add Admin" class="btn btn-primary" formaction="/admin/addadmin" >
+        <input type="submit"  value="Delete Admin" class="btn btn-danger" formaction="/admin/deleteadmin" >
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('partes//footer.ejs')%>
